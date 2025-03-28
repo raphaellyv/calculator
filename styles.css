@@ -18,6 +18,8 @@ body {
   border-radius: 20px;
   font-size: 24px;
   color: #554348;
+  height: 40px;
+  line-height: 40px;;
 }
 
 #keyboard {
@@ -35,4 +37,5 @@ body {
   height: 90px;
   border: none;
   font-size: 20px;
+  cursor: pointer;
 }
