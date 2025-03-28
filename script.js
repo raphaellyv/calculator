@@ -25,9 +25,18 @@ function operate(num1, operator, num2) {
 
 const display = document.querySelector("#display");
 let displayedKeys = '';
+let currentOperator = '';
 
 function displayKey(key) {
-  console.log(key);  
+  if ('+-/x'.includes(key)) {
+    if (currentOperator === '' ) {
+      currentOperator = key;
+    } else {
+      displayResult();
+      currentOperator = key;
+    }
+  }
+
   display.textContent += key;
   displayedKeys += key;
 };
@@ -35,9 +44,10 @@ function displayKey(key) {
 function displayResult() {
   const displayedNumbers = displayedKeys.split(/[-+/x]/);
   const firstOperator = displayedKeys.match(/[-/+x]/)[0];
-  const num1 = Number(displayedNumbers[0]);
+  const num1 = +displayedNumbers[0];
   const num2 = +displayedNumbers[1];
   
   displayedKeys = operate(num1, firstOperator, num2)
   display.textContent = displayedKeys;
 }
+
