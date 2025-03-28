@@ -19,23 +19,25 @@ function operate(num1, operator, num2) {
     case "+": return add(num1, num2);
     case "-": return subtract(num1, num2);
     case "x": return multiply(num1, num2);
-    case "÷": return divide(num1, num2);
+    case "/": return divide(num1, num2);
   }
 }
 
 const display = document.querySelector("#display");
-let displayedKeys = [];
+let displayedKeys = '';
 
 function displayKey(key) {
-  console.log(key);
+  console.log(key);  
   display.textContent += key;
-  displayedKeys.push(key);
+  displayedKeys += key;
 };
 
 function displayResult() {
-  const num1 = displayedKeys[0];
-  const operator = displayedKeys[1];
-  const num2 = displayedKeys[2];
-
-  display.textContent = operate(num1, operator, num2);
+  const displayedNumbers = displayedKeys.split(/[-+/x]/);
+  const firstOperator = displayedKeys.match(/[-/+x]/)[0];
+  const num1 = Number(displayedNumbers[0]);
+  const num2 = +displayedNumbers[1];
+  
+  displayedKeys = operate(num1, firstOperator, num2)
+  display.textContent = displayedKeys;
 }
