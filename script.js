@@ -28,26 +28,37 @@ let displayedKeys = '';
 let currentOperator = '';
 
 function displayKey(key) {
-  if ('+-/x'.includes(key)) {
-    if (currentOperator === '' ) {
-      currentOperator = key;
-    } else {
-      displayResult();
-      currentOperator = key;
-    }
-  }
+  console.log(key);
 
   display.textContent += key;
   displayedKeys += key;
 };
 
+function displayOperator(op) {
+  if (currentOperator === '' ) {
+    currentOperator = op;
+  } else {
+    displayResult();
+    currentOperator = op;
+  };
+
+  displayKey(op);
+}
+
 function displayResult() {
   const displayedNumbers = displayedKeys.split(/[-+/x]/);
-  const firstOperator = displayedKeys.match(/[-/+x]/)[0];
   const num1 = +displayedNumbers[0];
   const num2 = +displayedNumbers[1];
   
-  displayedKeys = operate(num1, firstOperator, num2)
+  if (currentOperator !== '' && num1 && num2 ) {
+    displayedKeys = operate(num1, currentOperator, num2)
+    display.textContent = displayedKeys;
+  }
+}
+
+function clearDisplay() {
+  displayedKeys = '';
+  currentOperator = '';
   display.textContent = displayedKeys;
 }
 
