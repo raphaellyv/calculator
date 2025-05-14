@@ -37,6 +37,10 @@ function displayKey(key) {
 function displayOperator(op) {
   if (currentOperator === '' ) {
     currentOperator = op;
+  } else if ('-+/x'.includes(displayedKeys.slice(-1))) {
+    currentOperator = op;
+    displayedKeys = displayedKeys.slice(0, -1);
+    display.textContent = displayedKeys;
   } else {
     displayResult();
     currentOperator = op;
