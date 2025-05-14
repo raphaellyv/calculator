@@ -50,9 +50,14 @@ function displayResult() {
   const num1 = +displayedNumbers[0];
   const num2 = +displayedNumbers[1];
   
-  if (currentOperator !== '' && num1 && num2 ) {
+  if (currentOperator === '/' && num2 === 0) {
+    displayedKeys = 'Not gonna work';
+    currentOperator = '';
+    display.textContent = displayedKeys;
+  } else if (currentOperator !== '' && num1 && num2 ) {
     displayedKeys = operate(num1, currentOperator, num2)
     display.textContent = displayedKeys;
+    currentOperator = '';
   }
 }
 
