@@ -26,9 +26,14 @@ function operate(num1, operator, num2) {
 const display = document.querySelector("#display");
 let displayedKeys = '';
 let currentOperator = '';
+let equalButtonWasPressed = false;
 
 function displayKey(key) {
-  console.log(key);
+  if (equalButtonWasPressed) {
+    displayedKeys = '';
+    display.textContent = displayedKeys;
+    equalButtonWasPressed = false;
+  }
 
   display.textContent += key;
   displayedKeys += key;
@@ -46,6 +51,7 @@ function displayOperator(op) {
     currentOperator = op;
   };
 
+  equalButtonWasPressed = false
   displayKey(op);
 }
 
@@ -63,6 +69,11 @@ function displayResult() {
     display.textContent = displayedKeys;
     currentOperator = '';
   }
+}
+
+function isEqualTo() {
+  equalButtonWasPressed = true;
+  displayResult()
 }
 
 function clearDisplay() {
