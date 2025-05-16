@@ -39,6 +39,14 @@ function displayKey(key) {
   displayedKeys += key;
 };
 
+function displayPoint() {
+
+  if (!displayedKeys.includes('.')
+    || (currentOperator !== '' && displayedKeys.split('.').length < 3)) {
+    displayKey('.');
+  }
+}
+
 function displayOperator(op) {
   if (currentOperator === '' ) {
     currentOperator = op;
@@ -65,7 +73,7 @@ function displayResult() {
     currentOperator = '';
     display.textContent = displayedKeys;
   } else if (currentOperator !== '' && num1 && num2 ) {
-    displayedKeys = operate(num1, currentOperator, num2)
+    displayedKeys = operate(num1, currentOperator, num2).toString();
     display.textContent = displayedKeys;
     currentOperator = '';
   }
@@ -81,4 +89,3 @@ function clearDisplay() {
   currentOperator = '';
   display.textContent = displayedKeys;
 }
-
