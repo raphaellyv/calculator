@@ -40,7 +40,6 @@ function displayKey(key) {
 };
 
 function displayPoint() {
-
   if (!displayedKeys.includes('.')
     || (currentOperator !== '' && displayedKeys.split('.').length < 3)) {
     displayKey('.');
@@ -48,19 +47,25 @@ function displayPoint() {
 }
 
 function displayOperator(op) {
+  if (displayedKeys.length === 0) {
+    displayedKeys += 0;
+    display.textContent = displayedKeys;
+  }
+
+  const operator = op === '*' ? 'x' : op;
   if (currentOperator === '' ) {
-    currentOperator = op;
+    currentOperator = operator;
   } else if ('-+/x'.includes(displayedKeys.slice(-1))) {
-    currentOperator = op;
+    currentOperator = operator;
     displayedKeys = displayedKeys.slice(0, -1);
     display.textContent = displayedKeys;
   } else {
     displayResult();
-    currentOperator = op;
+    currentOperator = operator;
   };
 
   equalButtonWasPressed = false
-  displayKey(op);
+  displayKey(operator);
 }
 
 function displayResult() {
@@ -98,3 +103,27 @@ function eraseLastKey() {
     display.textContent = displayedKeys;
   }
 }
+
+document.addEventListener('keydown', (e) => {
+  const key = e.key.toString();
+
+  switch (true) {
+    case /[0-9]/.test(key):
+      displayKey(key);
+      break;
+    case /[-+/*]/.test(key):
+      displayOperator(key);
+      break;
+    case /[.]/.test(key):
+      displayPoint();
+      break;
+    case /\bEnter\b/.test(key):
+      isEqualTo();
+      break;
+    case /\bBackspace\b/.test(key):
+      eraseLastKey();
+      break;
+    default:
+      console.log(key);
+  }
+})
