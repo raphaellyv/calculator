@@ -89,3 +89,12 @@ function clearDisplay() {
   currentOperator = '';
   display.textContent = displayedKeys;
 }
+
+function eraseLastKey() {
+  if (equalButtonWasPressed) {
+    clearDisplay();
+  } else {
+    displayedKeys = displayedKeys.slice(0,-1);
+    display.textContent = displayedKeys;
+  }
+}
