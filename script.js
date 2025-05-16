@@ -41,7 +41,7 @@ function displayKey(key) {
 
 function displayPoint() {
   if (!displayedKeys.includes('.')
-    || (currentOperator !== '' && displayedKeys.split('.').length < 3)) {
+    || (currentOperator !== '' && displayedKeys.split('.').length < 2)) {
     displayKey('.');
   }
 }
